@@ -1,24 +1,29 @@
 <h2>Products</h2>
-
-<div *ngFor="let product of products">
-  <!-- MOSTRAR NOMBRES DE PRODUCTOS-->
-   <!-- <h3>
-      {{ product.name }}
-    </h3>-->
-<!--HACER UN ENLACE PARA VER DETALLES DE PRODUCTO-->
+<div *ngFor="let product of products; index as productId">
   <h3>
-    <a [title]="product.name + ' details'">
-      {{ product.name }}
+
+    <a [title]="product.name + ' detalles' "[routerLink]="['/products', productId]">
+      {{product.name}}
     </a>
-  </h3>
-  <!-- AGREGAR DESCRIPCION-->
-  <p *ngIf="product.description">
-    Description: {{ product.description }}
-  </p>
-  <!--AGREGAR BOTON COMPARTIR-->
+
+    <p *ngIf="product.description">
+      Descripción: {{product.description}}
+      Precio: {{product.price}}      
+    </p>
+
+    <br>
+    
     <button (click)="share()">
-    Share
-  </button>
+      compartir
+    </button>
+
+    <app-product-alerts
+      [product]="product"
+      (notify)="onNotify()">
+    </app-product-alerts>
+
+
+  </h3>
 </div>
 
 
